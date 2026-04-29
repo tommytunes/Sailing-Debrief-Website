@@ -12,27 +12,27 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex-1 flex flex-col">
+      <main className="flex flex-col flex-1">
         <Routes>
           <Route path="/" element={
-            <div className="flex flex-1 justify-center items-center bg-gray-100">
+            <div className="flex flex-1 justify-center items-center bg-gray-100 min-h-screen">
               <p>Page to completed shortly</p>
             </div>
           } />
 
           <Route path="/pricing" element={
-            <div className="flex flex-1 justify-center items-center bg-gray-100">
+            <div className="flex justify-center items-center bg-gray-100 min-h-screen">
               <p>Page to completed shortly</p>
             </div>
           } />
 
           <Route path="/account" element={
-            <div className="flex flex-1 justify-center items-center bg-gray-100">
+            <div className="flex justify-center items-center bg-gray-100 min-h-screen">
               { user ? <Dashboard /> : <LoginScreen />}
             </div>
           } />
           <Route path="/download" element={
-            <div className="flex flex-1 justify-center items-center bg-gray-100">
+            <div className="flex justify-center items-center bg-gray-100 min-h-screen">
               <Download />
             </div>
             
