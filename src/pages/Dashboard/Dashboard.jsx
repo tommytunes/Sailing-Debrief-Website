@@ -2,19 +2,38 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../../auth/AuthProvider";
 import { supabase } from "../../auth/supabaseClient";
 import DashboardCard from "../../components/DashboardCard.jsx";
-import capitalize from 'capitalize';
 import { APP_VERSION } from "../../constants/appVersion.js";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
+import { isPro, isPaid } from "../../utils/isPro.js";
+import { isExpired } from "../../utils/isExpired.js";
 
 const Dashboard = () => {
     const { user, loading, profile } = useAuth();
     const name = user.user_metadata?.name || user.email?.split("@")[0] || "there";
     const email = user?.email;
+    const userIsPro = isPro(profile);
+    const userIsExpired = isExpired(profile);
+    const hasPaid = isPaid(profile);
     const navigate = useNavigate();
+    const remainingTrialDays = Math.ceil((new Date(profile?.trial_ends_at).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+
     const handleDeleteDevice = async () => {
         await supabase.from('user_devices').delete().eq('user_id', user.id);
     };
+
+    const handleManageAccount = async () => {
+        const {data, error} = await supabase.functions.invoke("create-portal-session", {
+            body: {customerId: profile?.stripe_customer_id}
+        })
+
+        if (error) return console.error(error);
+
+        window.location.href = data.url;
+
+    }
+    
+    const handleRenew = () => navigate('/pricing');
 
     const [deviceName, setDeviceName] = useState(undefined);                                                                      
                                                                                                                                 
@@ -56,9 +75,27 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="flex flex-row justify-center p-20 gap-20">
-            <DashboardCard title={`${capitalize(profile?.subscription_tier ?? '')} `} buttonTitle={'Manage'} subText={'Renews in X days'}/>
-            <DashboardCard title={`${APP_VERSION}`} buttonTitle={'Download'} subText={'Latest Version'} buttonHandler={() => navigate('/download')}/>
-            <DashboardCard title={'Registered Device'} buttonTitle={'Remove Device'} subText={deviceName === undefined ? 'Loading...' : deviceName || 'Device Not Registered'} buttonHandler={handleDeleteDevice}/>
+            <DashboardCard
+            title={loading ? '...' : (hasPaid ? 'Pro' : (userIsExpired ? 'Expired' : 'Trial'))}
+            buttonTitle={(profile?.stripe_customer_id ? 'Manage' : 'Suscribe')}
+            subText={loading ? 'Loading...' :
+                profile?.is_staff ? 'Subscription set by staff' :
+                hasPaid ? `Renews on ${new Date(profile?.subscription_expires_at).toLocaleDateString(undefined, {timeZone: 'UTC'})}` :
+                userIsExpired ? 'Subscription expired' :
+                `${remainingTrialDays} days remaining on your Free Trial`}
+            buttonHandler={profile?.stripe_customer_id ? handleManageAccount :  ( profile?.is_staff ? null : handleRenew )} />
+
+            <DashboardCard 
+            title={`${APP_VERSION}`} 
+            buttonTitle={'Download'} 
+            subText={'Latest Version'} 
+            buttonHandler={() => navigate('/download')}/>
+
+            <DashboardCard 
+            title={'Registered Device'} 
+            buttonTitle={'Remove Device'} 
+            subText={deviceName === undefined ? 'Loading...' : deviceName || 'Device Not Registered'} 
+            buttonHandler={handleDeleteDevice}/>
             </div>
             
          </div>

@@ -34,10 +34,10 @@ export function AuthProvider({ children }) {
     }
 
     useEffect(() => {
-        supabase.auth.getSession().then(({ data: { session } }) => {
+        supabase.auth.getSession().then(async ({ data: { session } }) => {
             setUser(session?.user ?? null);
             if (session?.user) {
-                fetchProfile(session.user.id);
+                await fetchProfile(session.user.id);
                 subscribeToProfile(session.user.id);
             }
             setLoading(false);

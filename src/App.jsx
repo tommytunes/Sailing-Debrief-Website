@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import { useAuth } from './auth/AuthProvider';
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Download from "./pages/Download/Download";
+import PricingPage from "./pages/Pricing/PricingPage";
 
 function App() {
   const { user, loading } = useAuth();
@@ -22,7 +23,7 @@ function App() {
 
           <Route path="/pricing" element={
             <div className="flex justify-center items-center bg-gray-100 min-h-screen">
-              <p>Page to completed shortly</p>
+              <PricingPage />
             </div>
           } />
 
@@ -38,6 +39,8 @@ function App() {
             
           } />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
+
+          <Route path="/getting-started" element={<></>} />
         </Routes>
       </main>
       <Footer/>
