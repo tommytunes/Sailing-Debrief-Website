@@ -18,7 +18,7 @@ const PricingPage = () => {
 
     return (
         <div className="flex flex-col items-center">
-            <h1 className="font-mono mb-5 text-blue-500">Pricing</h1>
+            <h1 className="font-mono mb-5 text-blue-500 pt-5">Pricing</h1>
             <h1 className="mb-15 text-6xl font-bold">One simple plan.</h1>
             <h1 className="font-mono text-gray-400 mb-10">Free 30 day trial no card needed</h1>
 
@@ -64,15 +64,15 @@ const PricingPage = () => {
                     </div>    
                 </div>
             </div>
-
+            <div className="pb-5">
             <div className="card card-border bg-gray-100 w-186 h-40">
                 <div className="card card-body">
                     <h1 className="card-title text-2xl">Teams and Federations</h1>
                     <h1 className="text-gray-400">5+ devices registered, consolidated billing, onboarding with your coaching staff</h1>
                     <h1 className="mt-auto font-bold">Contact for more details: team@sailing-debrief.com</h1>
                 </div>
+                </div>
             </div>
-
             </div>
 
         </div>

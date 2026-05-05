@@ -23,7 +23,7 @@ function App() {
 
           <Route path="/pricing" element={
             <div className="flex justify-center items-center bg-gray-100 min-h-screen">
-              <PricingPage />
+              {false && <PricingPage />}
             </div>
           } />
 
