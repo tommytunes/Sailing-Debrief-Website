@@ -17,10 +17,26 @@ const Dashboard = () => {
     const hasPaid = isPaid(profile);
     const navigate = useNavigate();
     const remainingTrialDays = Math.ceil((new Date(profile?.trial_ends_at).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+    const [showModal, setShowModal] = useState(false);
+    const [deleting, setDeleting] = useState(false);
 
     const handleDeleteDevice = async () => {
         await supabase.from('user_devices').delete().eq('user_id', user.id);
     };
+
+    const handleDeleteUser = async () => {
+        setDeleting(true);
+        const {data, error } = await supabase.functions.invoke("delete-account", {
+            body: {userId: user?.id}
+        })
+
+        if (error) {
+            console.error(error);
+            setDeleting(false);
+            return;
+        };
+        await supabase.auth.signOut();
+    }
 
     const handleManageAccount = async () => {
         const {data, error} = await supabase.functions.invoke("create-portal-session", {
@@ -98,6 +114,28 @@ const Dashboard = () => {
             buttonHandler={handleDeleteDevice}/>
             </div>
             
+            <div className="card card-border">
+                <div className="card-body">
+                    <h1 className="card-title text-red-400">Danger Zone</h1>
+                    <button className="btn btn-warning" onClick={() => setShowModal(true)}>Delete Account</button>
+                </div>
+            </div>
+
+            {showModal && (
+            <dialog open className="modal modal-open">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg text-red-500">Delete Account</h3>
+                    <p className="py-4">Are you sure? This will permanently delete your account and all associated data. This cannot be undone.</p>
+                    <div className="modal-action">
+                        <button className="btn" onClick={() => setShowModal(false)} disabled={deleting}>Cancel</button>
+                        <button className="btn btn-error" onClick={handleDeleteUser} disabled={deleting}>
+                            {deleting ? 'Deleting...' : 'Yes, Delete My Account'}
+                        </button>
+                    </div>
+                </div>
+                <div className="modal-backdrop" onClick={() => !deleting && setShowModal(false)} />
+            </dialog>
+        )}
          </div>
      );
 }

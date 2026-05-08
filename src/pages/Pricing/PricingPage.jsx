@@ -37,7 +37,7 @@ const PricingPage = () => {
                         <ul>
                             <li>✓ All pro features</li>
                         </ul>
-                        <button className="btn mt-auto" onClick={() => navigate("/account")}>Start Trial</button>
+                        <button className="btn mt-auto" onClick={() => navigate("/download")}>Start Trial</button>
                     </div>    
                 </div>
 
@@ -49,7 +49,7 @@ const PricingPage = () => {
                             <h1 className="text-gray-400 mt-auto ml-5">{ isMonthly ? '/ month' : '/ year'}</h1>
                         </div>
                         
-                        <h1 className="text text-gray-400">The full app. No card.</h1>
+                        <h1 className="text text-gray-400">The complete app.</h1>
                         <ul className="flex flex-col gap-4">
                             <li className="text-white">✓ Multi-angle synced video</li>
                             <li className="text-white">✓ Easily sync onboard audio</li>

@@ -7,6 +7,7 @@ import { useAuth } from './auth/AuthProvider';
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Download from "./pages/Download/Download";
 import PricingPage from "./pages/Pricing/PricingPage";
+import Features from "./pages/Features/Features";
 
 function App() {
   const { user, loading } = useAuth();
@@ -17,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={
             <div className="flex flex-1 justify-center items-center bg-gray-100 min-h-screen">
-              <p>Page to completed shortly</p>
+              <Features />
             </div>
           } />
 
