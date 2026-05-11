@@ -8,6 +8,8 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Download from "./pages/Download/Download";
 import PricingPage from "./pages/Pricing/PricingPage";
 import Features from "./pages/Features/Features";
+import GettingStarted from "./pages/GettingStarted/GettingStarted";
+import SignUpConfirm from "./pages/SignUpConfirm/SignUpConfirm";
 
 function App() {
   const { user, loading } = useAuth();
@@ -41,7 +43,18 @@ function App() {
           } />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
 
-          <Route path="/getting-started" element={<></>} />
+          <Route path="/getting-started" element={
+            <div className="flex justify-center items-center bg-gray-100 min-h-screen">
+              { false && <GettingStarted />}
+            </div>
+          } />
+
+          <Route path="/signup-confirmed" element={
+            <div className="flex justify-center items-center bg-gray-100 min-h-screen">
+              <SignUpConfirm />
+            </div>
+          } />
+
         </Routes>
       </main>
       <Footer/>

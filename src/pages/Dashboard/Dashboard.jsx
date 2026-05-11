@@ -8,6 +8,35 @@ import { useEffect, useState } from "react";
 import { isPro, isPaid } from "../../utils/isPro.js";
 import { isExpired } from "../../utils/isExpired.js";
 
+const DeleteAccount = () => {
+    return (
+        <>
+        <div className="card card-border">
+                <div className="card-body">
+                    <h1 className="card-title text-red-400">Danger Zone</h1>
+                    <button className="btn btn-warning" onClick={() => setShowModal(true)}>Delete Account</button>
+                </div>
+        </div>
+
+            {showModal && (
+            <dialog open className="modal modal-open">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg text-red-500">Delete Account</h3>
+                    <p className="py-4">Are you sure? This will permanently delete your account and all associated data. This cannot be undone.</p>
+                    <div className="modal-action">
+                        <button className="btn" onClick={() => setShowModal(false)} disabled={deleting}>Cancel</button>
+                        <button className="btn btn-error" onClick={handleDeleteUser} disabled={deleting}>
+                            {deleting ? 'Deleting...' : 'Yes, Delete My Account'}
+                        </button>
+                    </div>
+                </div>
+                <div className="modal-backdrop" onClick={() => !deleting && setShowModal(false)} />
+            </dialog>
+        )}
+        </>
+    );
+}
+
 const Dashboard = () => {
     const { user, loading, profile } = useAuth();
     const name = user.user_metadata?.name || user.email?.split("@")[0] || "there";
@@ -76,7 +105,8 @@ const Dashboard = () => {
                 .subscribe();
 
             return () => supabase.removeChannel(channel);                                                                             
-        }, []);  
+        }, []); 
+            
 
      return (
          <div className="p-10 flex flex-col items-center">
@@ -114,30 +144,10 @@ const Dashboard = () => {
             buttonHandler={handleDeleteDevice}/>
             </div>
             
-            <div className="card card-border">
-                <div className="card-body">
-                    <h1 className="card-title text-red-400">Danger Zone</h1>
-                    <button className="btn btn-warning" onClick={() => setShowModal(true)}>Delete Account</button>
-                </div>
-            </div>
-
-            {showModal && (
-            <dialog open className="modal modal-open">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg text-red-500">Delete Account</h3>
-                    <p className="py-4">Are you sure? This will permanently delete your account and all associated data. This cannot be undone.</p>
-                    <div className="modal-action">
-                        <button className="btn" onClick={() => setShowModal(false)} disabled={deleting}>Cancel</button>
-                        <button className="btn btn-error" onClick={handleDeleteUser} disabled={deleting}>
-                            {deleting ? 'Deleting...' : 'Yes, Delete My Account'}
-                        </button>
-                    </div>
-                </div>
-                <div className="modal-backdrop" onClick={() => !deleting && setShowModal(false)} />
-            </dialog>
-        )}
          </div>
      );
 }
+
+
 
 export default Dashboard;

@@ -1,7 +1,7 @@
 
 
 
-const DownloadCard = ({title, filePath}) => {
+const DownloadCard = ({title, filePath, buttonHandler}) => {
 
     const fileName = filePath.split("/").pop();
 
@@ -11,7 +11,7 @@ const DownloadCard = ({title, filePath}) => {
                 <h1 className="text text-3xl">{title}</h1>
                 <p className="text-sm font-mono text-gray-300">{fileName}</p>
                 <a href={filePath} download>
-                    <button className="btn btn-primary">Download</button>
+                    <button className="btn btn-primary" onClick={buttonHandler}>Download</button>
                 </a>
             </div>
         </div>
