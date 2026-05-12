@@ -2,9 +2,11 @@ import { useAuth } from "../../auth/AuthProvider";
 import { supabase } from "../../auth/supabaseClient";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { isPro, isPaid } from "../../utils/isPro";
+import { isExpired } from "../../utils/isExpired";
 
 const PricingPage = () => {
-    const {user} = useAuth();
+    const {user, profile} = useAuth();
     const navigate = useNavigate();
     const [isMonthly, setIsMonthly] = useState(true);
     const handleCheckout = async () => {
@@ -60,7 +62,7 @@ const PricingPage = () => {
                             <li className="text-white">✓ One registered computer at a time</li>
                             <li className="text-white">✓ All future updates included</li>
                         </ul>
-                        <button className="btn btn-primary mt-auto" onClick={(!user ? () => navigate("/account") : handleCheckout)}>Get Pro</button>
+                        <button className="btn btn-primary mt-auto" onClick={(!user ? () => navigate("/account") : (isPaid(profile) ? () => navigate("/account") : handleCheckout))}>Get Pro</button>
                     </div>    
                 </div>
             </div>

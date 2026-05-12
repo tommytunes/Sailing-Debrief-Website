@@ -45,7 +45,7 @@ const Dashboard = () => {
     const userIsExpired = isExpired(profile);
     const hasPaid = isPaid(profile);
     const navigate = useNavigate();
-    const remainingTrialDays = Math.ceil((new Date(profile?.trial_ends_at).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+    const remainingTrialDays = Math.ceil((new Date(profile?.trial_ends_at).getTime() - Date.now()) / (1000 * 60 * 60 * 24)) ?? 0;
     const [showModal, setShowModal] = useState(false);
     const [deleting, setDeleting] = useState(false);
 
@@ -123,7 +123,7 @@ const Dashboard = () => {
             <div className="flex flex-row justify-center p-20 gap-20">
             <DashboardCard
             title={loading ? '...' : (hasPaid ? 'Pro' : (userIsExpired ? 'Expired' : 'Trial'))}
-            buttonTitle={(profile?.stripe_customer_id ? 'Manage' : 'Suscribe')}
+            buttonTitle={(profile?.stripe_customer_id ? 'Manage' : 'Subscribe')}
             subText={loading ? 'Loading...' :
                 profile?.is_staff ? 'Subscription set by staff' :
                 hasPaid ? `Renews on ${new Date(profile?.subscription_expires_at).toLocaleDateString(undefined, {timeZone: 'UTC'})}` :

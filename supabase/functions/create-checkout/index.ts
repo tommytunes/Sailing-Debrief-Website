@@ -13,7 +13,7 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS, GET',
 }
 type PriceKey = 'priceMonth' | 'priceYear';  
-const priceId: Record<PriceKey, string> = {priceMonth: "price_1TRf6mRaFyMBvAJU3sP2yDzm", priceYear: "price_1TRxPaRaFyMBvAJUT8wkyC3E"}
+const priceId: Record<PriceKey, string> = {priceMonth: "price_1TVzzLDl7LLH4O6lRpDxCHcQ", priceYear: "price_1TVzzJDl7LLH4O6liBVQxywR"}
 
 Deno.serve( async (req) => {
   if (req.method === "OPTIONS") {
@@ -28,8 +28,8 @@ Deno.serve( async (req) => {
       client_reference_id: userId,
       customer_email: userEmail,
       line_items: [{ price: priceId[priceKey as PriceKey] , quantity: 1 }],
-      success_url: "http://localhost:5173/download",
-      cancel_url: "http://localhost:5173/download",
+      success_url: "http://sailing-debrief.com/account",
+      cancel_url: "http://sailing-debrief.com/pricing",
     });
 
     return new Response(JSON.stringify({url: session.url}), {
