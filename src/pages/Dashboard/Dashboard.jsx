@@ -113,7 +113,7 @@ const Dashboard = () => {
             <div className="card bg-white card-border w-[80vw]">
                 <div className="flex items-center justify-between px-6 py-6">
                     <div className="flex flex-col">
-                        <h1 className="text-4xl font-bold">Welcome, {name}</h1>
+                        <h1 className="text-2xl lg:text-4xl font-bold">Welcome, {name}</h1>
                         <p className="font-mono pt-2">{email}</p>
                     </div>
                     
