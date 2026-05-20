@@ -120,7 +120,7 @@ const Dashboard = () => {
                     <button className='btn btn-error' onClick={() => supabase.auth.signOut()}>Sign Out</button>
                 </div>
             </div>
-            <div className="flex flex-row justify-center p-20 gap-20">
+            <div className="flex flex-col lg:flex-row justify-center p-20 gap-20">
             <DashboardCard
             title={loading ? '...' : (hasPaid ? 'Pro' : (userIsExpired ? 'Expired' : 'Trial'))}
             buttonTitle={(profile?.stripe_customer_id ? 'Manage' : 'Subscribe')}

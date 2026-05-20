@@ -29,7 +29,7 @@ const PricingPage = () => {
                 <button className={`btn btn-lg ${!isMonthly ? 'btn-primary' : ''}`} onClick={() => setIsMonthly(!isMonthly)}>Annual - save 30%</button>
             </div>
             <div className="flex flex-col gap-6">
-            <div className="flex flex-row gap-6">
+            <div className="flex flex-col items-center lg:flex-row gap-6">
 
                 <div className="card card-border bg-white w-90 h-125">
                     <div className="card-body">
@@ -67,7 +67,7 @@ const PricingPage = () => {
                 </div>
             </div>
             <div className="pb-5">
-            <div className="card card-border bg-gray-100 w-186 h-40">
+            <div className="card card-border bg-gray-100 lg:w-186 h-40">
                 <div className="card card-body">
                     <h1 className="card-title text-2xl">Teams and Federations</h1>
                     <h1 className="text-gray-400">5+ devices registered, consolidated billing, onboarding with your coaching staff</h1>
