@@ -21,7 +21,7 @@ const PricingPage = () => {
     return (
         <div className="flex flex-col items-center">
             <h1 className="font-mono mb-5 text-blue-500 pt-5">Pricing</h1>
-            <h1 className="mb-15 text-6xl font-bold">One simple plan.</h1>
+            <h1 className="mb-15 text-4xl lg:text-6xl font-bold">One simple plan.</h1>
             <h1 className="font-mono text-gray-400 mb-10">Free 30 day trial no card needed</h1>
 
             <div className="flex flex-row mb-10 gap-4">
