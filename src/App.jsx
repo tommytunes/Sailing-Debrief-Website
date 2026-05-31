@@ -10,6 +10,8 @@ import PricingPage from "./pages/Pricing/PricingPage";
 import Features from "./pages/Features/Features";
 import GettingStarted from "./pages/GettingStarted/GettingStarted";
 import SignUpConfirm from "./pages/SignUpConfirm/SignUpConfirm";
+import TermsOfService from "./pages/Legal/TermsOfService";
+import PrivacyPolicy from "./pages/Legal/PrivacyPolicy";
 
 function App() {
   const { user, loading } = useAuth();
@@ -52,6 +54,18 @@ function App() {
           <Route path="/signup-confirmed" element={
             <div className="flex justify-center items-center bg-gray-100 min-h-screen">
               <SignUpConfirm />
+            </div>
+          } />
+
+          <Route path="/terms" element={
+            <div className="bg-gray-100 min-h-screen">
+              <TermsOfService />
+            </div>
+          } />
+
+          <Route path="/privacy" element={
+            <div className="bg-gray-100 min-h-screen">
+              <PrivacyPolicy />
             </div>
           } />
 

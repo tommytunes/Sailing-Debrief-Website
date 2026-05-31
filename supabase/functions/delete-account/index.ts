@@ -24,12 +24,18 @@ Deno.serve(async (req) => {
     Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
   )
 
-  const { data, error } = await supabase.auth.admin.deleteUser(userId);
+  const { data: userData, error: userError } = await supabase.auth.admin.getUserById(userId);
+  if (userError || !userData?.user?.email) {
+    return new Response(JSON.stringify(userError), { headers: {...corsHeaders}, status: 400 });
+  }
+
+  await supabase.from('used_trials').upsert({ email: userData.user.email });
+
+  const { error } = await supabase.auth.admin.deleteUser(userId);
 
   return new Response(
-    JSON.stringify(error), 
-    {headers: {...corsHeaders},
-    status: error ? 400: 200},
+    JSON.stringify(error),
+    { headers: {...corsHeaders}, status: error ? 400 : 200 },
   )
 })
 

@@ -71,6 +71,7 @@ export function LoginScreen() {
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                     {message && <p className="text-green-600 text-sm">{message}</p>}
                     <button className='btn' type="submit" disabled={loading || !!message}>{loading ? 'Loading...' : submitLabel}</button>
+                    
                     {isForgot ? (
                         <button className='btn' type="button" onClick={() => { setIsForgot(false); resetTransientState(); }}>
                             Back to log in
@@ -88,6 +89,7 @@ export function LoginScreen() {
                             }
                         </>
                     )}
+                    {isSignUp && <p className='text text-xs text-gray-500'>By Signing Up you are agree to the terms of service and our privacy policy.</p>}
                 </div>
             </form>
         </div>

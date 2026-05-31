@@ -32,7 +32,7 @@ const Features = () => {
                 </p>  
                 <p className="text-gray-600 mt-4 max-w-xl text-2xl font-bold">View any boats telemetry.</p>                                                                                                                                     
             </div>
-            <div className="flex flex-col lg:flex-row gap-4 items-stretch justify-center mt-5 mb-5 px-4">
+            <div className="flex flex-col lg:flex-row gap-4 items-center lg:items-stretch justify-center mt-5 mb-5 px-4">
                 <FeatureCard
                 title={"Multi Angle Synced Video"}
                 subText={"Have multiple cameras synced together to make onboard video review easier."}
@@ -57,7 +57,7 @@ const Features = () => {
                 <img src={Graphs} className="w-full lg:w-200 lg:ml-auto"/>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-4 items-stretch justify-center mt-5 mb-5 px-4">
+            <div className="flex flex-col lg:flex-row gap-4 items-center lg:items-stretch justify-center mt-5 mb-5 px-4">
                 <FeatureCard
                 title={"GPS Tracks"}
                 subText={"Have your gps track synced with your video to make debriefing easier."}
@@ -73,7 +73,7 @@ const Features = () => {
                 <p className="text-2xl text-center font-bold pb-2">Features to come</p>
                 <p className="text-center">360 Video Player</p>
                 <p className="text-center">Wind direction algorithm</p>
-                <p className="text-center">Email <span className="font-bold">team@sailing-debrief.com</span> for feature requests</p>
+                <p className="text-center">Email <a href="mailto:team@sailing-debrief.com" className="link link-primary">team@sailing-debrief.com</a>. for feature requests</p>
             </div>
             
             <div className="bg-blue-600 p-6 lg:p-12 flex flex-col items-center text-center gap-4">

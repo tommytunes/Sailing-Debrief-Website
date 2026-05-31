@@ -8,11 +8,30 @@ import { useEffect, useState } from "react";
 import { isPro, isPaid } from "../../utils/isPro.js";
 import { isExpired } from "../../utils/isExpired.js";
 
-const DeleteAccount = () => {
+const DeleteAccount = ({user}) => {
+
+    const [showModal, setShowModal] = useState(false);
+    const [deleting, setDeleting] = useState(false);
+
+    const handleDeleteUser = async () => {
+        setDeleting(true);
+        const {data, error } = await supabase.functions.invoke("delete-account", {
+            body: {userId: user?.id}
+        })
+
+        if (error) {
+            console.error(error);
+            setDeleting(false);
+            return;
+        };
+        await supabase.auth.signOut();
+    }
+
+
     return (
         <>
         <div className="card card-border">
-                <div className="card-body">
+                <div className="card-body bg-white">
                     <h1 className="card-title text-red-400">Danger Zone</h1>
                     <button className="btn btn-warning" onClick={() => setShowModal(true)}>Delete Account</button>
                 </div>
@@ -53,19 +72,7 @@ const Dashboard = () => {
         await supabase.from('user_devices').delete().eq('user_id', user.id);
     };
 
-    const handleDeleteUser = async () => {
-        setDeleting(true);
-        const {data, error } = await supabase.functions.invoke("delete-account", {
-            body: {userId: user?.id}
-        })
-
-        if (error) {
-            console.error(error);
-            setDeleting(false);
-            return;
-        };
-        await supabase.auth.signOut();
-    }
+    
 
     const handleManageAccount = async () => {
         const {data, error} = await supabase.functions.invoke("create-portal-session", {
@@ -122,12 +129,12 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-col lg:flex-row justify-center p-20 gap-20">
             <DashboardCard
-            title={loading ? '...' : (hasPaid ? 'Pro' : (userIsExpired ? 'Expired' : 'Trial'))}
+            title={loading ? '...' : (hasPaid ? 'Pro' : (profile?.subscription_tier === 'expired' ? 'Expired' : 'Trial'))}
             buttonTitle={(profile?.stripe_customer_id ? 'Manage' : 'Subscribe')}
             subText={loading ? 'Loading...' :
                 profile?.is_staff ? 'Subscription set by staff' :
                 hasPaid ? `Renews on ${new Date(profile?.subscription_expires_at).toLocaleDateString(undefined, {timeZone: 'UTC'})}` :
-                userIsExpired ? 'Subscription expired' :
+                profile?.subscription_tier === 'expired' ? 'Subscription expired' :
                 `${remainingTrialDays} days remaining on your Free Trial`}
             buttonHandler={profile?.stripe_customer_id ? handleManageAccount :  ( profile?.is_staff ? null : handleRenew )} />
 
@@ -143,6 +150,8 @@ const Dashboard = () => {
             subText={deviceName === undefined ? 'Loading...' : deviceName || 'Device Not Registered'} 
             buttonHandler={handleDeleteDevice}/>
             </div>
+
+            <DeleteAccount user={user} />
             
          </div>
      );

@@ -19,9 +19,11 @@ const Footer = () => {
                 </nav>
             </footer>
             <div className="border-t border-base-300">
-                <p className="text-center text-sm opacity-70 py-4">
-                    © {new Date().getFullYear()} Sailing Debrief
-                </p>
+                <div className="flex justify-center items-center gap-4 py-4">
+                    <p className="text-sm opacity-70">© {new Date().getFullYear()} Sailing Debrief</p>
+                    <NavLink to="/terms" className="text-sm opacity-70 link link-hover">Terms of Service</NavLink>
+                    <NavLink to="/privacy" className="text-sm opacity-70 link link-hover">Privacy Policy</NavLink>
+                </div>
             </div>
         </div>
     );
