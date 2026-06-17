@@ -71,7 +71,6 @@ const Features = () => {
             </div>
             <div className="mt-2 mb-2">
                 <p className="text-2xl text-center font-bold pb-2">Features to come</p>
-                <p className="text-center">360 Video Player</p>
                 <p className="text-center">Wind direction algorithm</p>
                 <p className="text-center">Email <a href="mailto:team@sailing-debrief.com" className="link link-primary">team@sailing-debrief.com</a>. for feature requests</p>
             </div>

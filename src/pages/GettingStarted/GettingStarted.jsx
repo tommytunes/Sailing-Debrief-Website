@@ -15,14 +15,14 @@ const GettingStarted = () => {
                     <div className="flex flex-col gap-2">
                         <div className="text-xl font-semibold">1. Adding Video Data</div>
                         <p className="text-gray-400 leading-relaxed">
-                            You can add video groups and each group will show up as a different source on the video player. The timestamp will be chosen automatically but can be adjusted if necessary.
+                            You can add video groups and each group will show up as a different source on the video player. The timestamp will be chosen automatically but can be adjusted if necessary. If you click the info button it is possible to make the video group use a 360 video player. 
                         </p>
                     </div>
 
                     <div className="flex flex-col gap-2">
                         <div className="text-xl font-semibold">2. Adding Telemetry Data</div>
                         <p className="text-gray-400 leading-relaxed">
-                            There are 2 ways to add telemetry data — using a <span className="font-mono text-sm bg-gray-700 px-1 rounded">.vkx</span> file or with a RaceSense URL.
+                            There are 2 ways to add telemetry data — using a <span className="font-mono text-sm bg-gray-700 px-1 rounded">.vkx</span>,  <span className="font-mono text-sm bg-gray-700 px-1 rounded">.fit</span> file or with a RaceSense URL.
                         </p>
                     </div>
 

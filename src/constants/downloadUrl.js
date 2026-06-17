@@ -1,0 +1,3 @@
+export const downloadMacM = "https://github.com/tommytunes/Sailing-Debrief-Website/releases/download/1.2.5/Sailing.Debrief-1.2.5-arm64.dmg";
+export const downloadMacIntel = "https://github.com/tommytunes/Sailing-Debrief-Website/releases/download/1.2.5/Sailing.Debrief-1.2.5.dmg";
+export const downloadWindows = "https://github.com/tommytunes/Sailing-Debrief-Website/releases/download/1.2.5/Sailing.Debrief.Setup.1.2.5.exe";
