@@ -36,7 +36,9 @@ export function LoginScreen() {
             const { data, error } = await supabase.auth.signUp({
                 email,
                 password,
-                options: { data: { name } },
+                options: { data: { name },
+                emailRedirectTo: `https://www.sailing-debrief.com/signup-confirmed`, },
+
             });
             if (error) return setError(error.message);
             if (!data.session) {
