@@ -76,6 +76,11 @@ const GettingStarted = () => {
                 <div className="text-xl font-semibold">8. Controls</div>
                 <p className="text-gray-400 leading-relaxed"><span className="font-bold text-black">Space Bar</span> is used to pause and play the videos. <span className="font-bold text-black">← →</span> control -1 or +1 second, <span className="font-bold text-black">Z & C</span> control -10 or +10 sec and <span className="font-bold text-black">A & D</span> control -60 or +60 seconds.</p>
             </div>
+
+            <div className="flex flex-col gap-2 mt-6">
+                <div className="text-xl font-semibold">9. Adding Wind Data</div>
+                <p className="text-gray-400 leading-relaxed">If you want to add wind data, email us at <a href="mailto:team@sailing-debrief.com" className="underline">team@sailing-debrief.com</a> with your CSV file and we can make it work for your format.</p>
+            </div>
         </div>
     );
 };
